@@ -10,6 +10,9 @@ class HomeScreen extends StatelessWidget {
     final HomeStore homeStore = Provider.of<HomeStore>(context);
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
       body: Observer(
         builder: (_) => Center(
           child: Column(
@@ -17,19 +20,20 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Text(homeStore.greeting),
               FlatButton(
-                  child: const Text('Go To Detail Screen'),
-                  onPressed: () {
-                    Router.navigator.pushNamed(
-                      Router.detailScreenRoute,
-                      arguments: homeStore.count,
-                    );
-                  }),
+                child: const Text('Go To Detail Screen'),
+                onPressed: () {
+                  Router.navigator.pushNamed(
+                    Router.detailScreenRoute,
+                    arguments: homeStore.count,
+                  );
+                },
+              ),
               RaisedButton(
                 child: const Text('Search Repos'),
                 onPressed: () => Navigator.of(context).pushNamed(
                   Router.repoListScreenRoute,
                 ),
-              )
+              ),
             ],
           ),
         ),

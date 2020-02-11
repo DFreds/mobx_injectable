@@ -10,6 +10,7 @@ import 'package:auto_route/router_utils.dart';
 import 'package:mobx_injectable/home/home_screen.dart';
 import 'package:mobx_injectable/detail/detail_screen.dart';
 import 'package:mobx_injectable/repo_list/repo_list_screen.dart';
+import 'package:auto_route/transitions_builders.dart';
 
 class Router {
   static const homeScreenRoute = '/';
@@ -35,11 +36,14 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => DetailScreen(count: typedArgs),
           settings: settings,
+          fullscreenDialog: true,
         );
       case Router.repoListScreenRoute:
-        return MaterialPageRoute(
-          builder: (_) => RepoListScreen(),
+        return PageRouteBuilder(
+          pageBuilder: (ctx, animation, secondaryAnimation) => RepoListScreen(),
           settings: settings,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          transitionDuration: Duration(milliseconds: 200),
         );
       default:
         return unknownRoutePage(settings.name);
