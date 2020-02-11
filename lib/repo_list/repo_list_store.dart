@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mobx_injectable/api/github_api.dart';
 import 'package:mobx_injectable/di/injection.dart';
 import 'package:mobx_injectable/models/github_repo_result.dart';
-import 'package:mobx_injectable/services/github_service.dart';
 
 part 'repo_list_store.g.dart';
 
@@ -10,7 +10,7 @@ part 'repo_list_store.g.dart';
 class RepoListStore extends _RepoListStore with _$RepoListStore {}
 
 abstract class _RepoListStore with Store {
-  final GithubService githubService = getIt<GithubService>();
+  final GithubApi githubApi = getIt<GithubApi>();
 
   GithubRepoResult repoResult = GithubRepoResult.initial();
 
@@ -36,7 +36,7 @@ abstract class _RepoListStore with Store {
   @action
   Future<GithubRepoResult> queryRepos() async {
     print('Querying repos with $query');
-    final Future<GithubRepoResult> future = githubService.loadRepoResult(query);
+    final Future<GithubRepoResult> future = githubApi.getRepoResult(query);
     queryReposFuture = ObservableFuture<GithubRepoResult>(future);
 
     repoResult = await future;
