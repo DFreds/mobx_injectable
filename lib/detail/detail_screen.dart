@@ -3,16 +3,19 @@ import 'package:mobx_injectable/home/home_store.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
-  static const String routeName = '/detail';
+  const DetailScreen({
+    @required this.count,
+  });
+
+  final int count;
 
   @override
   Widget build(BuildContext context) {
     final HomeStore homeStore = Provider.of<HomeStore>(context);
-    final String args = ModalRoute.of(context).settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Previous count is $args'),
+        title: Text('Previous count is $count'),
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.clear_all),

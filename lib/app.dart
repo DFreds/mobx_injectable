@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_injectable/detail/detail_screen.dart';
 import 'package:mobx_injectable/di/injection.dart';
-import 'package:mobx_injectable/home/home_screen.dart';
 import 'package:mobx_injectable/home/home_store.dart';
-import 'package:mobx_injectable/repo_list/repo_list_screen.dart';
 import 'package:mobx_injectable/repo_list/repo_list_store.dart';
+import 'package:mobx_injectable/router.gr.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -20,15 +18,12 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: HomeScreen.routeName,
+        initialRoute: Router.homeScreenRoute,
+        navigatorKey: Router.navigatorKey,
+        onGenerateRoute: Router.onGenerateRoute,
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
-        routes: <String, WidgetBuilder>{
-          HomeScreen.routeName: (_) => HomeScreen(),
-          DetailScreen.routeName: (_) => DetailScreen(),
-          RepoListScreen.routeName: (_) => RepoListScreen(),
-        },
       ),
     );
   }

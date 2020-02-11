@@ -5,8 +5,6 @@ import 'package:mobx_injectable/repo_list/repo_list_store.dart';
 import 'package:provider/provider.dart';
 
 class RepoListScreen extends StatelessWidget {
-  static const String routeName = '/repo-list';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
