@@ -78,4 +78,11 @@ mixin _$RepoListStore on _RepoListStore, Store {
       _$_RepoListStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'queryReposFuture: ${queryReposFuture.toString()},query: ${query.toString()},isError: ${isError.toString()},isLoading: ${isLoading.toString()},hasResults: ${hasResults.toString()}';
+    return '{$string}';
+  }
 }

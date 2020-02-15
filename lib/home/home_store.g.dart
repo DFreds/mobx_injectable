@@ -53,4 +53,11 @@ mixin _$HomeStore on _HomeStore, Store {
       _$_HomeStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'count: ${count.toString()},greeting: ${greeting.toString()}';
+    return '{$string}';
+  }
 }
