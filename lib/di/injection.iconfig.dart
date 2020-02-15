@@ -17,6 +17,5 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<Dio>(() => Dio());
   g.registerLazySingleton<GithubApi>(() => GithubApi(
         g<Dio>(),
-        baseUrl: g<String>(),
       ));
 }

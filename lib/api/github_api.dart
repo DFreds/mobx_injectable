@@ -8,7 +8,9 @@ part 'github_api.g.dart';
 @RestApi(baseUrl: 'https://api.github.com/')
 abstract class GithubApi {
   @factoryMethod
-  factory GithubApi(Dio dio, {String baseUrl}) = _GithubApi;
+  factory GithubApi(Dio dio) {
+    return _GithubApi(dio);
+  }
 
   @GET('/search/repositories')
   Future<GithubRepoResult> getRepoResult(@Query('q') String query, {@Query('sort') String sort = 'stars'});
