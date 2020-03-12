@@ -7,10 +7,14 @@ import 'package:mobx_injectable/models/github_repo_result.dart';
 part 'repo_list_store.g.dart';
 
 @injectable
-class RepoListStore extends _RepoListStore with _$RepoListStore {}
+class RepoListStore = _RepoListStore with _$RepoListStore;
 
 abstract class _RepoListStore with Store {
-  final GithubApi githubApi = getIt<GithubApi>();
+  _RepoListStore(
+    this.githubApi,
+  );
+
+  final GithubApi githubApi;
 
   GithubRepoResult repoResult = GithubRepoResult.initial();
 
@@ -31,7 +35,9 @@ abstract class _RepoListStore with Store {
   bool get isLoading => queryReposFuture.status == FutureStatus.pending;
 
   @computed
-  bool get hasResults => queryReposFuture != emptyResponse && queryReposFuture.status == FutureStatus.fulfilled;
+  bool get hasResults =>
+      queryReposFuture != emptyResponse &&
+      queryReposFuture.status == FutureStatus.fulfilled;
 
   @action
   Future<GithubRepoResult> queryRepos() async {

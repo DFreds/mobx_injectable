@@ -6,25 +6,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:auto_route/router_utils.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:mobx_injectable/home/home_screen.dart';
 import 'package:mobx_injectable/detail/detail_screen.dart';
 import 'package:mobx_injectable/repo_list/repo_list_screen.dart';
-import 'package:auto_route/transitions_builders.dart';
 
 class Router {
   static const homeScreenRoute = '/';
   static const detailScreenRoute = '/detail-screen-route';
   static const repoListScreenRoute = '/repo-list-screen-route';
-  static GlobalKey<NavigatorState> get navigatorKey =>
-      getNavigatorKey<Router>();
-  static NavigatorState get navigator => navigatorKey.currentState;
-
+  static final navigator = ExtendedNavigator();
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case Router.homeScreenRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => HomeScreen(),
           settings: settings,
         );
@@ -33,13 +29,13 @@ class Router {
           return misTypedArgsRoute<int>(args);
         }
         final typedArgs = args as int;
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => DetailScreen(count: typedArgs),
           settings: settings,
           fullscreenDialog: true,
         );
       case Router.repoListScreenRoute:
-        return PageRouteBuilder(
+        return PageRouteBuilder<dynamic>(
           pageBuilder: (ctx, animation, secondaryAnimation) => RepoListScreen(),
           settings: settings,
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,

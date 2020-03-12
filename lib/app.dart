@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         initialRoute: Router.homeScreenRoute,
-        navigatorKey: Router.navigatorKey,
+        navigatorKey: Router.navigator.key,
         onGenerateRoute: Router.onGenerateRoute,
         theme: ThemeData(
           primarySwatch: Colors.indigo,
